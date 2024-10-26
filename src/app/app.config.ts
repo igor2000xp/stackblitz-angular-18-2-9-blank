@@ -9,7 +9,6 @@ import { provideRouter } from "@angular/router";
 import { provideRouterStore, routerReducer } from "@ngrx/router-store";
 
 import { routes } from "./app.routes";
-import { FilterWordService } from "./core/services/filter-word.service";
 
 // import * as authEffects from './app/auth/store/effects';
 // import * as feedEffects from './app/shared/components/feed/store/effects';
@@ -30,7 +29,6 @@ import { FilterWordService } from "./core/services/filter-word.service";
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(),
-    FilterWordService,
     // withInterceptors([authInterceptor])
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter([...routes]),
