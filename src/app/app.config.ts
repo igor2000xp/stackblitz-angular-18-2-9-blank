@@ -10,6 +10,7 @@ import { provideRouterStore, routerReducer } from "@ngrx/router-store";
 
 import { routes } from "./app.routes";
 import { FilterWordService } from "./core/services/filter-word.service";
+import { ApiService } from "./core/services/api.service";
 
 // import * as authEffects from './app/auth/store/effects';
 // import * as feedEffects from './app/shared/components/feed/store/effects';
@@ -31,6 +32,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(),
     FilterWordService,
+    ApiService,
     // withInterceptors([authInterceptor])
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter([...routes]),

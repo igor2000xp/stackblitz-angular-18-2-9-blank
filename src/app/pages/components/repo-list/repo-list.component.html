@@ -1,3 +1,9 @@
 <p>repo-list works!</p>
 
 <div *ngIf="filterWord$ | async as word">Word: {{ word }}</div>
+
+<div *ngFor="let item of repos$ | async">
+  <div>
+    {{ item }}
+  </div>
+</div>

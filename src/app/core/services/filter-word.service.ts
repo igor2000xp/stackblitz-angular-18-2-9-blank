@@ -14,8 +14,6 @@ export class FilterWordService {
   private filterWordSubj = new BehaviorSubject("");
   filterWord$ = this.filterWordSubj.asObservable();
 
-  // constructor() { }
-
   getFilterWord(): Observable<string> {
     return this.filterWord$.pipe(
       debounceTime(600),
