@@ -22,24 +22,32 @@ import {
 export class HomeComponent implements OnDestroy {
   marbleObservable$ = new Observable<string>((subscriber) => {
     subscriber.next("A");
+
     setTimeout(() => {
       subscriber.next("B");
-    }, 100);
+    }, 1150);
     setTimeout(() => {
       subscriber.next("C");
-    }, 100);
+    }, 1300);
+
+    setTimeout(() => {
+      subscriber.complete();
+    }, 1400);
   });
 
   marbleObservableChild$ = new Observable<string>((subscriber) => {
-    setTimeout(() => {
-      subscriber.next("1");
-    }, 2000);
+    subscriber.next("1");
+
     setTimeout(() => {
       subscriber.next("2");
-    }, 3000);
+    }, 1000);
     setTimeout(() => {
       subscriber.next("3");
-    }, 4000);
+    }, 2000);
+
+    setTimeout(() => {
+      subscriber.complete();
+    }, 3100);
   });
   count = 0;
   m = "";
@@ -47,10 +55,10 @@ export class HomeComponent implements OnDestroy {
   sub = new Subscription();
 
   constructor() {
-    this.marbleObservable$
+    this.sub = this.marbleObservableChild$
       .pipe(
-        mergeMap((parentValue) => {
-          return this.marbleObservableChild$.pipe(
+        switchMap((parentValue) => {
+          return this.marbleObservable$.pipe(
             map((childValue) => parentValue + childValue) // Concatenate parent and child values
           );
         })
